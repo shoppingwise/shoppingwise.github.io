@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
-
-Sitemap: https://.github.io/sitemap.xml
+#DaumWebMasterTool:85242bbc7346c270a2ee7579f6bca52af57b7c26ecbb4a358e414587c25d59d1:RukPQ0VizsMPuTcEawMjeg==
+Sitemap: https://shoppingwise.github.io/sitemap.xml
