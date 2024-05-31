@@ -3,7 +3,7 @@ name: GitHub Pages
 on:
   push:
     branches:
-      - main  # main 브랜치에 push할 때마다 빌드합니다.
+      - master  # main 브랜치에 push할 때마다 빌드합니다.
 
 jobs:
   build:
