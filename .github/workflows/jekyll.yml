@@ -3,14 +3,14 @@ name: GitHub Pages
 on:
   push:
     branches:
-      - master  # main 브랜치에 push할 때마다 빌드합니다.
+      - main  # main 브랜치에 push할 때마다 빌드합니다.
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3  # Node.js 20을 사용하는 최신 버전으로 업데이트
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
