@@ -1,7 +1,21 @@
 source 'https://rubygems.org'
 
+gem 'jekyll', '~> 3.9.5'
 gem 'github-pages', group: :jekyll_plugins
-install_if -> { ENV["GITHUB_ACTIONS"] != "true" } do
-    puts "Is GitHub action: #{ENV["GITHUB_ACTIONS"] == "true"}"
-    gem "webrick", "~> 1.8"
-end 
+
+group :jekyll_plugins do
+  gem 'jekyll-seo-tag'
+  gem 'jekyll-sitemap'
+  gem 'jekyll-feed'
+  gem 'jekyll-paginate'
+  gem 'jekyll-gist'
+  gem 'jekyll-github-metadata'
+  gem 'jekyll-include-cache'
+  gem 'jekyll-coffeescript'
+  gem 'jekyll-commonmark-ghpages'
+  gem 'jekyll-relative-links'
+  gem 'jekyll-optional-front-matter'
+  gem 'jekyll-readme-index'
+  gem 'jekyll-default-layout'
+  gem 'jekyll-titles-from-headings'
+end
