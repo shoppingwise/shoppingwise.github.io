@@ -1,31 +1,44 @@
-name: Build and Deploy
+name: Jekyll site CI
+
 on:
   push:
-    branches:
-      - main  # 또는 master
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+    - uses: actions/checkout@v3
+    
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: '3.2'
+        bundler-cache: true
+    
+    - name: Install Dependencies
+      run: |
+        gem install bundler
+        bundle install
+    
+    - name: Build site
+      run: bundle exec jekyll build
       
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: '3.2'  # 최신 안정 버전 사용
-          bundler-cache: true  # 번들러 캐시 활성화
-      
-      - name: Install Dependencies
-        run: |
-          gem install bundler
-          bundle install
-      
-      - name: Build Site
-        run: bundle exec jekyll build
-      
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./_site
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v1
+        
+  deploy:
+    needs: build
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2
